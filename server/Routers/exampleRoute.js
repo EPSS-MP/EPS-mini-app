@@ -1,9 +1,8 @@
-import express from 'express'
-import {importedNameOfYourController} from 'directory'
+const express = require('express');
+const { userC } = require('path/to/your/controller'); // Adjust the path to your controller
 
 let nameOfRoute = express.Router();
 
-tableCreate.get('/yourRoute',importedNameOfYourController)
+nameOfRoute.post('/yourRoute', userC);
 
-
-export default  nameOfRoute
+module.exports = nameOfRoute;
