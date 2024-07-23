@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-
+const {AllRouters}= require('./Router.js')
 require('dotenv').config();
 const app = express();
 
@@ -10,6 +10,11 @@ const db = require('./models');
 app.use(express.urlencoded({extended:true}));
 app.use(express.json())
 app.use(cors({origin:true}))
+
+
+
+//  mani routes
+app.use(AllRouters)
 
 // example routes for  CRUD
 

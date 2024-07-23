@@ -1,8 +1,8 @@
 const express = require('express');
-const { userC } = require('../controllers/UserC.js'); // Adjust the path to your controller
+const { userC } = require('../controllers/UserC.js'); 
 
-let nameOfRoute = express.Router();
+let userCreateRouter = express.Router();
 
-nameOfRoute.post('/createUser', userC);
+userCreateRouter.post('/createUser', userC);
 
-module.exports = nameOfRoute;
+module.exports = {userCreateRouter};

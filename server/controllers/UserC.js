@@ -1,11 +1,12 @@
 
 const { Sequelize, Model, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:');
+// const sequelize = new Sequelize('sqlite::memory:');
 
-const { sequelize, User } = require('./models');
+const { sequelize, User } = require('../models');
 
-export const userC = (req, res) => {
+ const userC = (req, res) => {
   const { firstName, lastName, email, password } = req.body;
+  console.log(firstName, lastName, email, password)
 
   // Validation checks
   const errors = [];
@@ -46,7 +47,8 @@ export const userC = (req, res) => {
     firstName,
     lastName,
     email,
-    password
+    password,
+    role:'student'
   })
   .then((user) => {
     console.log(user);
@@ -57,3 +59,5 @@ export const userC = (req, res) => {
     res.status(500).end('Error adding user');
   });
 };
+
+module.exports ={userC}
