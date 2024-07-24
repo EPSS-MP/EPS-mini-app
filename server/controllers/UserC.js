@@ -1,12 +1,17 @@
 
 const { Sequelize, Model, DataTypes } = require('sequelize');
 // const sequelize = new Sequelize('sqlite::memory:');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv')
+// initialize cors 
+dotenv.config()
 
 const { sequelize, User } = require('../models');
 
- const userC = (req, res) => {
+ const userC = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
-  console.log(firstName, lastName, email, password)
+
 
   // Validation checks
   const errors = [];
@@ -41,22 +46,25 @@ const { sequelize, User } = require('../models');
   if (errors.length > 0) {
     return res.status(400).json({ errors });
   }
+ let salt = await bcrypt.genSalt(10);
+ let hashPassword = await bcrypt.hash(password,salt)
+
 
   // If validation passes, create the user
   User.create({
     firstName,
     lastName,
     email,
-    password,
+    password :hashPassword,
     role:'student'
   })
   .then((user) => {
-    console.log(user);
-    res.end('User added successfully');
+     let token = jwt.sign({user_id:user.userId,email:user.email,role:user.role},process.env.SECRET_KEY,{expiresIn :"3d"})
+    res.end(token);
   })
   .catch((err) => {
     console.log(err.message);
-    res.status(500).end('Error adding user');
+    res.status(500).end(err.message);
   });
 };
 

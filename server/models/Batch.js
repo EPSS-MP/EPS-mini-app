@@ -8,11 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     batchName: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: { msg: "Batch Name cannot be empty." },
-        is: { args: /^[A-Za-z\s-]+$/, msg: "Batch Name can only contain alphabetic characters, spaces, and hyphens." }
-      }
+      allowNull: false
     },
     numberOfGroups: {
       type: DataTypes.INTEGER,
