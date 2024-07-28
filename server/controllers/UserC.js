@@ -55,7 +55,6 @@ const { sequelize, User } = require('../models');
     lastName,
     email,
     password :hashPassword,
-    role:'student'
   })
   .then((user) => {
      let token = jwt.sign({user_id:user.userId,email:user.email,role:user.role},process.env.SECRET_KEY,{expiresIn :"3d"})
