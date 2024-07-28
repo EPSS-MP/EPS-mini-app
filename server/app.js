@@ -11,10 +11,8 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json())
 app.use(cors({origin:true}))
 
-
-
 //  mani routes
-app.use(AllRouters)
+app.use('/api',AllRouters)
 
 // example routes for  CRUD
 

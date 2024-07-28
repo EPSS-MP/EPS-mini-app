@@ -12,7 +12,6 @@ const { sequelize, User } = require('../models');
  const userC = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
-
   // Validation checks
   const errors = [];
 
